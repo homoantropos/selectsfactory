@@ -1,0 +1,23 @@
+.main_container {
+  width: 80%;
+  height: 80vh;
+  position: absolute;;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: solid grey 1px;
+}
+.dark {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+}
+
+.medium {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+.light {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
