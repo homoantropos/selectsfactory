@@ -1,0 +1,27 @@
+import {Injectable} from "@angular/core";
+import {MockDataBase} from "../data/mockDb/mockDataBase";
+import {Observable, of} from "rxjs";
+import {FilterRequestInitValue} from "../config/types";
+import {FilterFieldModel} from "../data/mockDb/models";
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class FilterRequestService {
+
+  constructor(
+    private db: MockDataBase
+  ) { }
+
+  createField(filterField: FilterFieldModel): Observable<FilterRequestInitValue> {
+    return of(this.db.addFilterField(filterField))
+  }
+
+  getRequest(values?: Array<string>): Observable<FilterRequestInitValue> {
+    return of(
+      this.db.getFilterRequestInitValue(values)
+    )
+  }
+
+}

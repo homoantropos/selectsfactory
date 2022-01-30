@@ -1,13 +1,15 @@
 <div class="main_container p-a-1">
+
   <div class="dark col-sm-4 m-a-0 p-a-o">
 
   </div>
   <div class="medium col-sm-4 m-a-0 p-a-o">
     <app-request-spring
-    [filterRequestInitValue]="filterRequestInitValue"
+      [filterRequestInitValue]="filterRequestInitValue"
     ></app-request-spring>
   </div>
   <div class="light col-sm-4 m-a-0 p-a-o">
-
+    <div *ngIf="filterRequestInitValue"> {{filterRequestInitValue | json}}</div>
   </div>
 </div>
+
