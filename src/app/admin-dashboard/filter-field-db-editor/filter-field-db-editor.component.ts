@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../services/filterRequetsServise";
@@ -10,6 +10,7 @@ import {FilterRequestService} from "../../services/filterRequetsServise";
 })
 export class FilterFieldDbEditorComponent implements OnInit {
 
+  @Input() fieldName: string = '';
   // @ts-ignore
   filterFieldEditorForm: FormGroup;
 
@@ -20,39 +21,53 @@ export class FilterFieldDbEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dbService.getFilterFieldByKey(
-      'direction')
-      .subscribe(
-        response => {
-          if (typeof response === "string") {
-            console.log(response)
-          } else {
-            this.createForm({
-              fieldName: response.fieldName,
-              initValue: response.initValue,
-              valueOptions: response.valueOptions
-            })
+    if (this.fieldName.length > 0) {
+      this.dbService.getFilterFieldByKey(this.fieldName)
+        .subscribe(
+          response => {
+            if (typeof response === "string") {
+              alert(response);
+            } else {
+              this.createForm(response);
+            }
           }
-          console.log(this.filterFieldEditorForm.value);
-        }
-      )
+        )
+    } else {
+      this.createForm();
+    }
+
   }
 
-  createForm(value: FilterFieldModel): void {
+  createForm(value?: FilterFieldModel | null): void {
     const valueOptions: Array<{ value: string, option: string }> = [];
-    value.valueOptions.map(
-      valueOption => {
-        valueOptions.push({
-          value: valueOption.value,
-          option: valueOption.option
-        });
-        this.filterFieldEditorForm = this.fb.group({
-          fieldName: [value.fieldName, Validators.required],
-          initValue: [value.initValue, Validators.required],
-          valueOptions: this.fb.array(valueOptions)
-        })
-      }
-    );
+    if (value) {
+      value.valueOptions.map(
+        valueOption => {
+          valueOptions.push({
+            value: valueOption.value,
+            option: valueOption.option
+          });
+        }
+      );
+    } else {
+      valueOptions.push({value: '', option: ''})
+    }
+    this.filterFieldEditorForm = this.fb.group({
+      fieldName: [value ? value.fieldName : '', Validators.required],
+      initValue: [value ? value.initValue : '', Validators.required],
+      valueOptions: this.fb.array(valueOptions)
+    })
+
+    console.log(this.filterFieldEditorForm.value)
+  }
+
+  addValueOption(value: string, option: string): void {
+    this.filterFieldEditorForm.value.valueOptions.add(
+      this.fb.control({
+        value: [value, Validators.required],
+        option: [option, Validators.required]
+      })
+    )
   }
 
 }

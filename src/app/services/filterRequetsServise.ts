@@ -28,4 +28,10 @@ export class FilterRequestService {
     return of(this.db.getFilterFieldByKey(key));
   }
 
+  getFilterFields(): Observable<Array<FilterFieldModel> | string> {
+    return of(
+      this.db.db
+    )
+  }
+
 }

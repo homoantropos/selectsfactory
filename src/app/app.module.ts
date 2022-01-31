@@ -12,6 +12,8 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FilterFieldDbEditorComponent } from './admin-dashboard/filter-field-db-editor/filter-field-db-editor.component';
+import { FilterFieldsListComponent } from './admin-dashboard/filter-fields-list/filter-fields-list.component';
+import { FilterFieldsDashboardComponent } from './admin-dashboard/filter-fields-dashboard/filter-fields-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FilterFieldDbEditorComponent } from './admin-dashboard/filter-field-db-
     MainPageComponent,
     RequestSpringComponent,
     LoaderComponent,
-    FilterFieldDbEditorComponent
+    FilterFieldDbEditorComponent,
+    FilterFieldsListComponent,
+    FilterFieldsDashboardComponent
   ],
   imports: [
     BrowserModule,

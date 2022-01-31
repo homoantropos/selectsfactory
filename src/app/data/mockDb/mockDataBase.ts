@@ -66,7 +66,7 @@ export class MockDataBase {
           }
         }
       });
-    if(values?.includes('years')) {
+    if (values?.includes('years')) {
       response = this.dbService.addYear(response);
     }
     return response;
@@ -75,10 +75,11 @@ export class MockDataBase {
   getFilterFieldByKey(fieldName: string): FilterFieldModel | string {
     const filterField = this.db.filter(filterField => filterField.fieldName === fieldName)[0];
     let response;
-    if(filterField) {
+    if (filterField) {
       response = filterField
     } else {
       response = 'Такого поля не існує'
+      console.log(response)
     }
     return response
   }
