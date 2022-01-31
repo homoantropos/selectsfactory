@@ -24,4 +24,8 @@ export class FilterRequestService {
     )
   }
 
+  getFilterFieldByKey(key: string): Observable<FilterFieldModel | string> {
+    return of(this.db.getFilterFieldByKey(key));
+  }
+
 }

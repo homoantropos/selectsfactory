@@ -72,6 +72,17 @@ export class MockDataBase {
     return response;
   }
 
+  getFilterFieldByKey(fieldName: string): FilterFieldModel | string {
+    const filterField = this.db.filter(filterField => filterField.fieldName === fieldName)[0];
+    let response;
+    if(filterField) {
+      response = filterField
+    } else {
+      response = 'Такого поля не існує'
+    }
+    return response
+  }
+
 }
 
 
