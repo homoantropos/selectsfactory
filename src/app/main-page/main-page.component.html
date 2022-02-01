@@ -5,12 +5,20 @@
       <app-filter-fields-dashboard></app-filter-fields-dashboard>
     </ng-container>
   </div>
+
   <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
+
     <app-request-spring
       *ngIf="showMainPage"
       [filterRequestInitValue]="filterRequestInitValue"
     ></app-request-spring>
+
+    <app-filter-field-db-editor
+      *ngIf="!showMainPage">
+
+    </app-filter-field-db-editor>
   </div>
+
   <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
     <div *ngIf="filterRequestInitValue"> {{filterRequestInitValue | json}}</div>
   </div>
