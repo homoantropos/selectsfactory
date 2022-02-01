@@ -34,21 +34,30 @@
     </div>
   </ng-template>
 
-  <mat-form-field class="forms-inputs" formArrayName = "valueOptions"
-                  *ngFor="let vo of filterFieldEditorForm.value.valueOptions; let i = index"
+  <ng-container formArrayName="valueOptions"
+       *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']; let i = index"
   >
-    <mat-label>опції...</mat-label>
-    <input matInput
-           #value
-           title="for value"
-           type="text"
-           formControlName="[{{i}}]value">
-    <input matInput
-           #fieldName
-           title="for option"
-           type="text"
-           formControlName="[{{i}}]option">
-  </mat-form-field>
+    <form formGroupName="{{i}}">
+      <mat-form-field class="forms-inputs">
+        <mat-label>value:</mat-label>
+        <input matInput
+               #value
+               title="for value"
+               type="text"
+               formControlName="value">
+      </mat-form-field>
+
+      <mat-form-field class="forms-inputs">
+        <mat-label>option:</mat-label>
+        <input matInput
+               #fieldName
+               title="for option"
+               type="text"
+               formControlName="option">
+      </mat-form-field>
+
+    </form>
+  </ng-container>
 
   <button mat-button color="primary" type="button" (click)="edit = !edit">
     редагувати

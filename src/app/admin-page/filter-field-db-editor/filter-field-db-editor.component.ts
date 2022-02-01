@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 
@@ -40,23 +40,29 @@ export class FilterFieldDbEditorComponent implements OnInit {
   }
 
   createForm(value?: FilterFieldModel | null): void {
-    const valueOptions: Array<{ value: string, option: string }> = [];
+    let valueOptions = this.fb.array([]);
     if (value) {
       value.valueOptions.map(
         valueOption => {
-          valueOptions.push({
-            value: valueOption.value,
-            option: valueOption.option
-          });
+          valueOptions.push(this.fb.group({
+              value: [valueOption.value],
+              option: [valueOption.option]
+            })
+          );
         }
       );
     } else {
-      valueOptions.push({value: '', option: ''})
+      valueOptions.push(this.fb.group(
+        {
+          value: [''],
+          option: ['']
+        }
+      ))
     }
     this.filterFieldEditorForm = this.fb.group({
       fieldName: [value ? value.fieldName : '', Validators.required],
       initValue: [value ? value.initValue : ''],
-      valueOptions: this.fb.array(valueOptions)
+      valueOptions: valueOptions
     })
 
     console.log(this.filterFieldEditorForm.value)
@@ -71,6 +77,9 @@ export class FilterFieldDbEditorComponent implements OnInit {
     )
   }
 
+  getValueOptionsArray(): FormArray {
+    return this.filterFieldEditorForm.controls['valueOptions'] as FormArray;
+  }
   onSubmit(): void {
 
   }
