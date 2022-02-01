@@ -1,1 +1,58 @@
-<p>filter-field-db works!</p>
+<form
+  [formGroup]="filterFieldEditorForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field class="forms-inputs" *ngIf="edit; else disabled">
+    <mat-label>назва поля...</mat-label>
+    <input matInput
+           #fieldName
+           title="for fieldName"
+           type="text"
+           formControlName="fieldName">
+  </mat-form-field>
+
+  <ng-template #disabled>
+    <div class="wide">
+      <p class="m-b-0"><b>назва поля:</b></p>
+      <span class="m-b-3">{{filterFieldEditorForm.value.fieldName}}</span>
+    </div>
+  </ng-template>
+
+  <mat-form-field class="forms-inputs" *ngIf="edit; else initValue">
+    <mat-label>початкове значення...</mat-label>
+    <input matInput
+           #initValue
+           title="for initValue"
+           type="text"
+           formControlName="initValue">
+  </mat-form-field>
+
+  <ng-template #initValue>
+    <div class="wide">
+      <p class="m-b-0"><b>початкове значення:</b></p>
+      <span class="m-b-3">{{filterFieldEditorForm.value.initValue}}</span>
+    </div>
+  </ng-template>
+
+<!--  <mat-form-field class="forms-inputs">-->
+<!--    <mat-label>опції...</mat-label>-->
+<!--    <input matInput-->
+<!--           #value-->
+<!--           title="for value"-->
+<!--           type="text"-->
+<!--           formControlName="value">-->
+<!--    <input matInput-->
+<!--           #fieldName-->
+<!--           title="for option"-->
+<!--           type="text"-->
+<!--           formControlName="option">-->
+<!--  </mat-form-field>-->
+
+  <button mat-button color="primary" type="button" (click)="edit = !edit">
+    редагувати
+  </button>
+
+  <button mat-button color="primary" type="submit">
+    додати
+  </button>
+</form>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 
@@ -10,27 +10,31 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 export class FilterFieldsDashboardComponent implements OnInit {
 
   // @ts-ignore
-  field: string;
+  @Input() field: string;
   fields: Array<FilterFieldModel> = [];
   details = false;
 
   constructor(
-    private frs: FilterRequestService
-  ) { }
+    private frs: FilterRequestService,
+    private changeDetect: ChangeDetectorRef
+  ) {
+  }
 
   ngOnInit(): void {
     this.frs.getFilterFields()
       .subscribe(
-        responce => {
-          if(typeof responce !== 'string') {
-            this.fields = responce
+        response => {
+          if (typeof response !== 'string') {
+            this.fields = response
           }
         }
       );
   }
 
   showField(fieldName: string): void {
+    this.details = !this.details;
     this.field = fieldName;
+    this.changeDetect.detectChanges();
     this.details = true;
   }
 

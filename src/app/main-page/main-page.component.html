@@ -1,32 +1,32 @@
 <div class="main_container p-a-1">
 
-  <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
-    <ng-container *ngIf="!showMainPage">
-      <app-filter-fields-dashboard></app-filter-fields-dashboard>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="showMainPage; else adminDashboard">
+    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
 
-  <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
+    </div>
 
-    <app-request-spring
-      *ngIf="showMainPage"
-      [filterRequestInitValue]="filterRequestInitValue"
-    ></app-request-spring>
+    <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
+      <app-request-spring
+        [filterRequestInitValue]="filterRequestInitValue"
+      ></app-request-spring>
 
-    <app-filter-field-db-editor
-      *ngIf="!showMainPage">
+    </div>
 
-    </app-filter-field-db-editor>
-  </div>
+    <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
 
-  <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
-    <div *ngIf="filterRequestInitValue"> {{filterRequestInitValue | json}}</div>
-  </div>
+    </div>
+  </ng-container>
+
+  <ng-template #adminDashboard>
+    <app-filter-fields-dashboard></app-filter-fields-dashboard>
+  </ng-template>
+
 
   <button mat-button color="primary" (click)="showAdmin()">
     <span *ngIf="showMainPage; else admin">admin</span>
     <ng-template #admin><span>main</span></ng-template>
   </button>
+
 
 </div>
 

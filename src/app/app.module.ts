@@ -15,6 +15,7 @@ import { FilterFieldDbEditorComponent } from './admin-page/filter-field-db-edito
 import { FilterFieldsListComponent } from './admin-page/filter-fields-list/filter-fields-list.component';
 import { FilterFieldsDashboardComponent } from './admin-page/filter-fields-dashboard/filter-fields-dashboard.component';
 import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -26,17 +27,18 @@ import {MatButtonModule} from "@angular/material/button";
     FilterFieldsListComponent,
     FilterFieldsDashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatButtonModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatInputModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

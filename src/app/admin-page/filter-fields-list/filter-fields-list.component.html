@@ -1,20 +1,18 @@
 <ng-container *ngIf="fields !== undefined; else empty">
-<table class="table table-striped">
-  <thead>
-  <th>
+  <table class="table table-striped m-a-0 m-b-1 p-a-0">
+    <thead>
     <tr>
       <th>Ключ поля фільтрування</th>
     </tr>
-  </th>
-  </thead>
-  <tbody *ngFor = "let field of fields">
-  <tr>
-    <td
-      (click)="emitFieldForEditor(field.fieldName)"
-    >{{field.fieldName}}</td>
-  </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody *ngFor="let field of fields">
+    <tr>
+      <td
+        (click)="emitFieldForEditor(field.fieldName)"
+      >{{field.fieldName}}</td>
+    </tr>
+    </tbody>
+  </table>
 
 </ng-container>
 

@@ -13,6 +13,7 @@ export class FilterFieldDbEditorComponent implements OnInit {
   @Input() fieldName: string = '';
   // @ts-ignore
   filterFieldEditorForm: FormGroup;
+  edit = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +55,7 @@ export class FilterFieldDbEditorComponent implements OnInit {
     }
     this.filterFieldEditorForm = this.fb.group({
       fieldName: [value ? value.fieldName : '', Validators.required],
-      initValue: [value ? value.initValue : '', Validators.required],
+      initValue: [value ? value.initValue : ''],
       valueOptions: this.fb.array(valueOptions)
     })
 
@@ -68,6 +69,10 @@ export class FilterFieldDbEditorComponent implements OnInit {
         option: [option, Validators.required]
       })
     )
+  }
+
+  onSubmit(): void {
+
   }
 
 }
