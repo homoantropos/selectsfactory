@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FilterRequestInitValue} from "../config/types";
-import {FilterRequestService} from "../services/filterRequetsServise";
+import {FilterRequestInitValue} from "../shared/config/types";
+import {FilterRequestService} from "../shared/services/filterRequetsServise";
 
 @Component({
   selector: 'app-main-page',
@@ -11,10 +11,12 @@ import {FilterRequestService} from "../services/filterRequetsServise";
 export class MainPageComponent implements OnInit {
 
   filterRequestInitValue: FilterRequestInitValue = {};
+  showMainPage = true;
 
   constructor(
     private frService: FilterRequestService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.frService.getRequest(['years']).subscribe(
@@ -24,4 +26,7 @@ export class MainPageComponent implements OnInit {
     );
   }
 
+  showAdmin(): void {
+    this.showMainPage = !this.showMainPage;
+  }
 }

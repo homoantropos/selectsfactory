@@ -9,19 +9,23 @@
 }
 .dark {
   background-color: rgba(0, 0, 0, 0.3);
-  height: 100%;
 }
 
 .medium {
   background-color: rgba(0, 0, 0, 0.2);
-  height: 100%;
 }
 
 .light {
   background-color: rgba(0, 0, 0, 0.1);
-  height: 100%;
 }
 
+.heightEmbedded {
+  height: 95%;
+}
 
+button {
+  border: none;
+  border-radius: 0px;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

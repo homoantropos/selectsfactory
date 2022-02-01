@@ -1,4 +1,4 @@
-import {FilterRequestInitValue} from "../../config/types";
+import {FilterRequestInitValue} from "../../shared/config/types";
 import {Injectable} from "@angular/core";
 
 @Injectable({

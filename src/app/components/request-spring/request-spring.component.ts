@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../config/types";
+import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../shared/config/types";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({

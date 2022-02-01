@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {MockDataBase} from "../data/mockDb/mockDataBase";
+import {MockDataBase} from "../../data/mockDb/mockDataBase";
 import {Observable, of} from "rxjs";
 import {FilterRequestInitValue} from "../config/types";
-import {FilterFieldModel} from "../data/mockDb/models";
+import {FilterFieldModel} from "../../data/mockDb/models";
 
 @Injectable({
   providedIn: 'root'

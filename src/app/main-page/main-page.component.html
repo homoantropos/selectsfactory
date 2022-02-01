@@ -1,16 +1,25 @@
 <div class="main_container p-a-1">
 
-  <div class="dark col-sm-4 m-a-0 p-a-o">
-
+  <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
+    <ng-container *ngIf="!showMainPage">
+      <app-filter-fields-dashboard></app-filter-fields-dashboard>
+    </ng-container>
   </div>
-  <div class="medium col-sm-4 m-a-0 p-a-o">
+  <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
     <app-request-spring
+      *ngIf="showMainPage"
       [filterRequestInitValue]="filterRequestInitValue"
     ></app-request-spring>
   </div>
-  <div class="light col-sm-4 m-a-0 p-a-o">
+  <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
     <div *ngIf="filterRequestInitValue"> {{filterRequestInitValue | json}}</div>
   </div>
+
+  <button mat-button color="primary" (click)="showAdmin()">
+    <span *ngIf="showMainPage; else admin">admin</span>
+    <ng-template #admin><span>main</span></ng-template>
+  </button>
+
 </div>
 
-<app-filter-fields-dashboard></app-filter-fields-dashboard>
+

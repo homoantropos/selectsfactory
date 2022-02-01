@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {FilterRequestInitValue} from "../../config/types";
+import {FilterRequestInitValue} from "../../shared/config/types";
 import {DbService} from "./db.service";
 import {FilterFieldModel} from "./models";
 

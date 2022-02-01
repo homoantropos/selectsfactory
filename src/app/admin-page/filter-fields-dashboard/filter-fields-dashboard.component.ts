@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FilterFieldModel} from "../../data/mockDb/models";
-import {FilterRequestService} from "../../services/filterRequetsServise";
+import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 
 @Component({
   selector: 'app-filter-fields-dashboard',
