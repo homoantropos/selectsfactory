@@ -34,19 +34,21 @@
     </div>
   </ng-template>
 
-<!--  <mat-form-field class="forms-inputs">-->
-<!--    <mat-label>опції...</mat-label>-->
-<!--    <input matInput-->
-<!--           #value-->
-<!--           title="for value"-->
-<!--           type="text"-->
-<!--           formControlName="value">-->
-<!--    <input matInput-->
-<!--           #fieldName-->
-<!--           title="for option"-->
-<!--           type="text"-->
-<!--           formControlName="option">-->
-<!--  </mat-form-field>-->
+  <mat-form-field class="forms-inputs" formArrayName = "valueOptions"
+                  *ngFor="let vo of filterFieldEditorForm.value.valueOptions; let i = index"
+  >
+    <mat-label>опції...</mat-label>
+    <input matInput
+           #value
+           title="for value"
+           type="text"
+           formControlName="[{{i}}]value">
+    <input matInput
+           #fieldName
+           title="for option"
+           type="text"
+           formControlName="[{{i}}]option">
+  </mat-form-field>
 
   <button mat-button color="primary" type="button" (click)="edit = !edit">
     редагувати
