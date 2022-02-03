@@ -15,7 +15,7 @@ export class FilterRequestService {
     private db: MockDataBase
   ) { }
 
-  createField(filterField: FilterFieldModel): Observable<FilterRequestInitValue> {
+  createField(filterField: FilterFieldModel): Observable<Array<FilterFieldModel>> {
     return of(this.db.addOrUpdateFilterField(filterField))
   }
 

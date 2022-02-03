@@ -10,7 +10,11 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 
 export class FilterFieldsDashboardComponent implements OnInit {
 
-  fields: Array<FilterFieldModel> = [];
+  static _fields: Array<FilterFieldModel> = [];
+
+  get fields() {
+    return FilterFieldsDashboardComponent._fields;
+  }
 
   @Input() field: string = '';
   emptyDBMessage = '';
@@ -27,7 +31,7 @@ export class FilterFieldsDashboardComponent implements OnInit {
       .subscribe(
         response => {
           if (typeof response !== 'string') {
-            this.fields = response
+            FilterFieldsDashboardComponent._fields = response
           } else {
             this.emptyDBMessage = response;
           }

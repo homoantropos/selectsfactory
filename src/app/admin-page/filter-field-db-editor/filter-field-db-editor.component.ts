@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
+import {FilterFieldsDashboardComponent} from "../filter-fields-dashboard/filter-fields-dashboard.component";
 
 @Component({
   selector: 'app-filter-field-db-editor',
@@ -79,7 +80,8 @@ export class FilterFieldDbEditorComponent implements OnInit {
   onSubmit(value: FilterFieldModel): void {
     this.dbService.createField(value)
       .subscribe(
-        () => {
+        (fields) => {
+          FilterFieldsDashboardComponent._fields = fields;
           this.edit = !this.edit;
         }
       )
