@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 

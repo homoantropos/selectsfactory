@@ -3,6 +3,7 @@ import {MockDataBase} from "../../data/mockDb/mockDataBase";
 import {Observable, of} from "rxjs";
 import {FilterRequestInitValue} from "../config/types";
 import {FilterFieldModel} from "../../data/mockDb/models";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class FilterRequestService {
   getFilterFields(): Observable<Array<FilterFieldModel> | string> {
     return of(
       this.db.db
+    ).pipe(
+      map(
+        db => {return (db.length === 0) ?  "База фільтрів порожня" : db;}
+      )
     )
   }
 

@@ -7,12 +7,14 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
   templateUrl: './filter-fields-dashboard.component.html',
   styleUrls: ['./filter-fields-dashboard.component.css']
 })
+
 export class FilterFieldsDashboardComponent implements OnInit {
 
+  fields: Array<FilterFieldModel> = [];
+  emptyDBMessage = '';
   // @ts-ignore
   @Input() field: string;
-  fields: Array<FilterFieldModel> = [];
-  details = false;
+  showEditor = false;
 
   constructor(
     private frs: FilterRequestService,
@@ -26,16 +28,18 @@ export class FilterFieldsDashboardComponent implements OnInit {
         response => {
           if (typeof response !== 'string') {
             this.fields = response
+          } else {
+            this.emptyDBMessage = response;
           }
         }
       );
   }
 
-  showField(fieldName: string): void {
-    this.details = !this.details;
+  editField(fieldName: string): void {
+    this.showEditor = !this.showEditor;
     this.field = fieldName;
     this.changeDetect.detectChanges();
-    this.details = true;
+    this.showEditor = true;
   }
 
 }

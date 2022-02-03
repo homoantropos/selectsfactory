@@ -1,12 +1,19 @@
 <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
-  <app-filter-fields-list
-    [fields]="fields"
-    (fieldName)="showField($event)"
-  ></app-filter-fields-list>
+
+  <ng-container *ngIf="(emptyDBMessage === ''); else emptyDbAlert">
+    <app-filter-fields-list
+      [fields]="fields"
+      (fieldName)="editField($event)"
+    ></app-filter-fields-list>
+  </ng-container>
+
+  <ng-template #emptyDbAlert>
+    <h3 class="centerVertical">{{emptyDBMessage}}</h3>
+  </ng-template>
 </div>
 
 <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
-  <ng-container class="col-sm-10" *ngIf="details">
+  <ng-container class="col-sm-12" *ngIf="showEditor">
     <app-filter-field-db-editor
       [fieldName]="field"
     ></app-filter-field-db-editor>
