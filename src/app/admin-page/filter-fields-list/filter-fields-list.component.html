@@ -9,11 +9,16 @@
     <tr>
       <td
         (click)="emitFieldForEditor(field.fieldName)"
+        class="pointer"
       >{{field.fieldName}}</td>
     </tr>
     </tbody>
   </table>
 
+<mat-icon
+  class="pointer"
+  (click)="emitFieldForEditor('')"
+>add</mat-icon>
 </ng-container>
 
 <ng-template #empty>

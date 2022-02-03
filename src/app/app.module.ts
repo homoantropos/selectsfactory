@@ -16,6 +16,7 @@ import { FilterFieldsListComponent } from './admin-page/filter-fields-list/filte
 import { FilterFieldsDashboardComponent } from './admin-page/filter-fields-dashboard/filter-fields-dashboard.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {MatInputModule} from "@angular/material/input";
         MatOptionModule,
         MatSelectModule,
         MatButtonModule,
-        MatInputModule
+        MatInputModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]

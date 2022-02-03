@@ -23,13 +23,13 @@
   height: 95%;
 }
 
-button {
-  border: none;
-  border-radius: 0px;
-}
-
 .wide {
   width: 100%;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

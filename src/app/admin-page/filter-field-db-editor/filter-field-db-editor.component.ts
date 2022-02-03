@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 
@@ -11,6 +11,8 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 export class FilterFieldDbEditorComponent implements OnInit {
 
   @Input() fieldName: string = '';
+  // @ts-ignore
+  @ViewChild('nme') private nme: ElementRef;
   // @ts-ignore
   filterFieldEditorForm: FormGroup;
   edit = false;
@@ -34,7 +36,9 @@ export class FilterFieldDbEditorComponent implements OnInit {
           }
         )
     } else {
+      this.edit = true;
       this.createForm();
+      setTimeout(() => this.nme.nativeElement.focus(), 0);
     }
 
   }
@@ -64,8 +68,6 @@ export class FilterFieldDbEditorComponent implements OnInit {
       initValue: [value ? value.initValue : ''],
       valueOptions: valueOptions
     })
-
-    console.log(this.filterFieldEditorForm.value)
   }
 
   addValueOption(value: string, option: string): void {
@@ -80,8 +82,16 @@ export class FilterFieldDbEditorComponent implements OnInit {
   getValueOptionsArray(): FormArray {
     return this.filterFieldEditorForm.controls['valueOptions'] as FormArray;
   }
-  onSubmit(): void {
 
+  onSubmit(value: FilterFieldModel): void {
+    this.dbService.createField(value)
+      .subscribe(
+        response => console.log(response)
+      )
   }
 
+  changeEdit(): void {
+    this.edit = true;
+    setTimeout(() => this.nme.nativeElement.focus(), 0);
+  }
 }

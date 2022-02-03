@@ -43,8 +43,13 @@ export class MockDataBase {
     return this._db;
   }
 
-  addFilterField(filterField: FilterFieldModel): FilterRequestInitValue {
+  addOrUpdateFilterField(filterField: FilterFieldModel): FilterRequestInitValue {
+    const i = this._db.findIndex(ff => ff.fieldName === filterField.fieldName);
+    if (i !== -1) {
+      delete this._db[i];
+    }
     this._db.push(filterField);
+
     let response: FilterRequestInitValue = {};
     response[filterField.fieldName] = {
       initValue: filterField.initValue,

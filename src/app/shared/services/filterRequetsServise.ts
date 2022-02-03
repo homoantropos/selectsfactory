@@ -15,7 +15,7 @@ export class FilterRequestService {
   ) { }
 
   createField(filterField: FilterFieldModel): Observable<FilterRequestInitValue> {
-    return of(this.db.addFilterField(filterField))
+    return of(this.db.addOrUpdateFilterField(filterField))
   }
 
   getRequest(values?: Array<string>): Observable<FilterRequestInitValue> {

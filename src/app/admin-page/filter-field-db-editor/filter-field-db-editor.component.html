@@ -1,11 +1,11 @@
 <form
   [formGroup]="filterFieldEditorForm"
-  (ngSubmit)="onSubmit()"
+  (ngSubmit)="onSubmit(filterFieldEditorForm.value)"
 >
   <mat-form-field class="forms-inputs" *ngIf="edit; else disabled">
     <mat-label>назва поля...</mat-label>
     <input matInput
-           #fieldName
+           #nme
            title="for fieldName"
            type="text"
            formControlName="fieldName">
@@ -21,7 +21,6 @@
   <mat-form-field class="forms-inputs" *ngIf="edit; else initValue">
     <mat-label>початкове значення...</mat-label>
     <input matInput
-           #initValue
            title="for initValue"
            type="text"
            formControlName="initValue">
@@ -35,13 +34,12 @@
   </ng-template>
 
   <ng-container formArrayName="valueOptions"
-       *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']; let i = index"
+                *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']; let i = index"
   >
     <form formGroupName="{{i}}">
       <mat-form-field class="forms-inputs">
         <mat-label>value:</mat-label>
         <input matInput
-               #value
                title="for value"
                type="text"
                formControlName="value">
@@ -50,7 +48,6 @@
       <mat-form-field class="forms-inputs">
         <mat-label>option:</mat-label>
         <input matInput
-               #fieldName
                title="for option"
                type="text"
                formControlName="option">
@@ -63,7 +60,9 @@
     редагувати
   </button>
 
-  <button mat-button color="primary" type="submit">
+  <button
+    [disabled] = "filterFieldEditorForm.invalid"
+    mat-button color="primary" type="submit">
     додати
   </button>
 </form>
