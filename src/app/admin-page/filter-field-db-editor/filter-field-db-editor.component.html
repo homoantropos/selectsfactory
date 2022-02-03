@@ -1,68 +1,76 @@
-<form
-  [formGroup]="filterFieldEditorForm"
-  (ngSubmit)="onSubmit(filterFieldEditorForm.value)"
->
-  <mat-form-field class="forms-inputs" *ngIf="edit; else disabled">
-    <mat-label>назва поля...</mat-label>
-    <input matInput
-           #nameInput
-           title="for fieldName"
-           type="text"
-           formControlName="fieldName">
-  </mat-form-field>
-
-  <ng-template #disabled>
-    <div class="wide">
-      <p class="m-b-0"><b>назва поля:</b></p>
-      <span class="m-b-3">{{filterFieldEditorForm.value.fieldName}}</span>
-    </div>
-  </ng-template>
-
-  <mat-form-field class="forms-inputs" *ngIf="edit; else initValue">
-    <mat-label>початкове значення...</mat-label>
-    <input matInput
-           title="for initValue"
-           type="text"
-           formControlName="initValue">
-  </mat-form-field>
-
-  <ng-template #initValue>
-    <div class="wide">
-      <p class="m-b-0"><b>початкове значення:</b></p>
-      <span class="m-b-3">{{filterFieldEditorForm.value.initValue}}</span>
-    </div>
-  </ng-template>
-
-  <ng-container formArrayName="valueOptions"
-                *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']; let i = index"
+<ng-container class="forms-inputs" *ngIf="edit; else disabled">
+  <form
+    [formGroup]="filterFieldEditorForm"
+    (ngSubmit)="onSubmit(filterFieldEditorForm.value)"
   >
-    <form formGroupName="{{i}}">
-      <mat-form-field class="forms-inputs">
-        <mat-label>value:</mat-label>
-        <input matInput
-               title="for value"
-               type="text"
-               formControlName="value">
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>назва поля...</mat-label>
+      <input matInput
+             #nameInput
+             title="for fieldName"
+             type="text"
+             formControlName="fieldName">
+    </mat-form-field>
 
-      <mat-form-field class="forms-inputs">
-        <mat-label>option:</mat-label>
-        <input matInput
-               title="for option"
-               type="text"
-               formControlName="option">
-      </mat-form-field>
+    <mat-form-field class="forms-inputs">
+      <mat-label>початкове значення...</mat-label>
+      <input matInput
+             title="for initValue"
+             type="text"
+             formControlName="initValue">
+    </mat-form-field>
 
-    </form>
-  </ng-container>
+    <ng-container formArrayName="valueOptions"
+                  *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']; let i = index"
+    >
+      <form formGroupName="{{i}}">
 
-  <button mat-button color="primary" type="button" (click)="edit = !edit">
-    редагувати
-  </button>
+        <mat-form-field class="forms-inputs">
+          <mat-label>value:</mat-label>
+          <input matInput
+                 title="for value"
+                 type="text"
+                 formControlName="value">
+        </mat-form-field>
 
-  <button
-    [disabled] = "filterFieldEditorForm.invalid"
-    mat-button color="primary" type="submit">
-    додати
-  </button>
-</form>
+        <mat-form-field class="forms-inputs">
+          <mat-label>option:</mat-label>
+          <input matInput
+                 title="for option"
+                 type="text"
+                 formControlName="option">
+        </mat-form-field>
+
+      </form>
+    </ng-container>
+
+    <button
+      [disabled]="filterFieldEditorForm.invalid"
+      mat-button color="primary" type="submit">
+      додати
+    </button>
+  </form>
+</ng-container>
+
+<ng-template #disabled>
+
+  <div class="wide">
+    <p class="m-b-0"><b>назва поля:</b></p>
+    <span class="m-b-3">{{filterFieldEditorForm.value['fieldName']}}</span>
+  </div>
+
+
+  <div class="wide">
+    <p class="m-b-0"><b>початкове значення:</b></p>
+    <span class="m-b-3">{{filterFieldEditorForm.value['initValue']}}</span>
+  </div>
+
+  <div class="wide" *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']">
+    <span class="m-b-3">{{valueOptionGroup.value['option']}}</span>
+  </div>
+
+</ng-template>
+
+<button mat-button color="primary" type="button" (click)="edit = !edit">
+  редагувати
+</button>

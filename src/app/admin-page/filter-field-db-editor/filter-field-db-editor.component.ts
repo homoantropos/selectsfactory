@@ -8,6 +8,7 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
   templateUrl: './filter-field-db-editor.component.html',
   styleUrls: ['./filter-field-db-editor.component.css']
 })
+
 export class FilterFieldDbEditorComponent implements OnInit {
 
   @Input() fieldName: string = '';
