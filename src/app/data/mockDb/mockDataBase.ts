@@ -44,10 +44,8 @@ export class MockDataBase {
   }
 
   addOrUpdateFilterField(filterField: FilterFieldModel): Array<FilterFieldModel> {
-    const i = this._db.findIndex(ff => ff.fieldName === filterField.fieldName);
-    if (i !== -1) {
-      delete this._db[i];
-    }
+    this._db = this._db.filter(ff => ff.fieldName !== filterField.fieldName);
+    this._db.push(filterField);
     return this.db;
   }
 
