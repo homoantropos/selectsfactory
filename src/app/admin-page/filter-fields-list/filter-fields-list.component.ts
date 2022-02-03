@@ -6,6 +6,7 @@ import {FilterFieldModel} from "../../data/mockDb/models";
   templateUrl: './filter-fields-list.component.html',
   styleUrls: ['./filter-fields-list.component.css']
 })
+
 export class FilterFieldsListComponent implements OnInit {
 
   @Input() fields: Array<FilterFieldModel> = [];

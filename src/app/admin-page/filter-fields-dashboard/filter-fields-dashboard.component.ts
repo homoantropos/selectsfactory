@@ -11,9 +11,9 @@ import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 export class FilterFieldsDashboardComponent implements OnInit {
 
   fields: Array<FilterFieldModel> = [];
+
+  @Input() field: string = '';
   emptyDBMessage = '';
-  // @ts-ignore
-  @Input() field: string;
   showEditor = false;
 
   constructor(

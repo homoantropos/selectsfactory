@@ -12,7 +12,7 @@ export class FilterFieldDbEditorComponent implements OnInit {
 
   @Input() fieldName: string = '';
   // @ts-ignore
-  @ViewChild('nme') private nme: ElementRef;
+  @ViewChild('nameInput') private nameInput: ElementRef;
   // @ts-ignore
   filterFieldEditorForm: FormGroup;
   edit = false;
@@ -38,45 +38,40 @@ export class FilterFieldDbEditorComponent implements OnInit {
     } else {
       this.edit = true;
       this.createForm();
-      setTimeout(() => this.nme.nativeElement.focus(), 0);
+      setTimeout(() => this.nameInput.nativeElement.focus(), 0);
     }
 
   }
 
   createForm(value?: FilterFieldModel | null): void {
-    let valueOptions = this.fb.array([]);
+    this.filterFieldEditorForm = this.fb.group({
+      fieldName: [value ? value.fieldName : '', Validators.required],
+      initValue: [value ? value.initValue : ''],
+      valueOptions: this.fb.array([])
+    })
     if (value) {
       value.valueOptions.map(
         valueOption => {
-          valueOptions.push(this.fb.group({
-              value: [valueOption.value],
-              option: [valueOption.option]
-            })
+          this.addValueOption(
+            valueOption.value,
+            valueOption.option
           );
         }
       );
     } else {
-      valueOptions.push(this.fb.group(
-        {
-          value: [''],
-          option: ['']
-        }
-      ))
+      this.addValueOption('', '');
     }
-    this.filterFieldEditorForm = this.fb.group({
-      fieldName: [value ? value.fieldName : '', Validators.required],
-      initValue: [value ? value.initValue : ''],
-      valueOptions: valueOptions
-    })
+
   }
 
   addValueOption(value: string, option: string): void {
-    this.filterFieldEditorForm.value.valueOptions.add(
-      this.fb.control({
+    this.getValueOptionsArray().push(
+      this.fb.group({
         value: [value, Validators.required],
         option: [option, Validators.required]
       })
     )
+    console.log(this.getValueOptionsArray())
   }
 
   getValueOptionsArray(): FormArray {
@@ -92,6 +87,6 @@ export class FilterFieldDbEditorComponent implements OnInit {
 
   changeEdit(): void {
     this.edit = true;
-    setTimeout(() => this.nme.nativeElement.focus(), 0);
+    setTimeout(() => this.nameInput.nativeElement.focus(), 0);
   }
 }
