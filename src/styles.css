@@ -33,11 +33,15 @@
 
 button {
   border: none;
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .wide {
   width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5 {
