@@ -1,4 +1,4 @@
-<div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
+<div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
   <ng-container *ngIf="(emptyDBMessage === ''); else emptyDbAlert">
     <app-filter-fields-list
@@ -13,7 +13,7 @@
 
 </div>
 
-<div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
+<div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
   <ng-container class="col-sm-12" *ngIf="showEditor">
     <app-filter-field-db-editor
       [fieldName]="field"
@@ -21,7 +21,7 @@
   </ng-container>
 </div>
 
-<div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
+<div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
 </div>
 

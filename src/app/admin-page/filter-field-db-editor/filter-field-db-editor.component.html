@@ -46,7 +46,8 @@
 
     <button
       [disabled]="filterFieldEditorForm.invalid"
-      mat-button color="primary" type="submit">
+      mat-button color="primary" type="submit"
+    >
       додати
     </button>
   </form>
@@ -54,23 +55,29 @@
 
 <ng-template #disabled>
 
-  <div class="wide">
-    <p class="m-b-0"><b>назва поля:</b></p>
-    <span class="m-b-3">{{filterFieldEditorForm.value['fieldName']}}</span>
-  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>назва поля:</th>
+      <td><span class="m-b-3">{{filterFieldEditorForm.value['fieldName']}}</span></td>
+    </tr>
+    <tr>
+      <th>початкове значення:</th>
+      <td><span class="m-b-3">{{filterFieldEditorForm.value['initValue']}}</span></td>
+    </tr>
+  </table>
 
-
-  <div class="wide">
-    <p class="m-b-0"><b>початкове значення:</b></p>
-    <span class="m-b-3">{{filterFieldEditorForm.value['initValue']}}</span>
-  </div>
-
-  <div class="wide" *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']">
-    <span class="m-b-3">{{valueOptionGroup.value['option']}}</span>
+  <div class="table table-striped" *ngFor="let valueOptionGroup of getValueOptionsArray()['controls']">
+      <th class="col-sm-3">value:</th>
+      <td class="col-sm-3"><span class="m-b-3">{{valueOptionGroup.value['value']}}</span></td>
+      <th class="col-sm-3">option:</th>
+      <td class="col-sm-3"><span class="m-b-3">{{valueOptionGroup.value['option']}}</span></td>
   </div>
 
 </ng-template>
 
-<button mat-button color="primary" type="button" (click)="edit = !edit">
+<button *ngIf="!edit"
+  mat-button color="primary"
+  type="button"
+  (click)="edit = !edit">
   редагувати
 </button>

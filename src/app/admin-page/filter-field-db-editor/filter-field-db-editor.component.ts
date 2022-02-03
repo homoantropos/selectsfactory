@@ -41,7 +41,6 @@ export class FilterFieldDbEditorComponent implements OnInit {
       this.createForm();
       setTimeout(() => this.nameInput.nativeElement.focus(), 0);
     }
-
   }
 
   createForm(value?: FilterFieldModel | null): void {
@@ -62,7 +61,6 @@ export class FilterFieldDbEditorComponent implements OnInit {
     } else {
       this.addValueOption('', '');
     }
-
   }
 
   addValueOption(value: string, option: string): void {
@@ -72,7 +70,6 @@ export class FilterFieldDbEditorComponent implements OnInit {
         option: [option, Validators.required]
       })
     )
-    console.log(this.getValueOptionsArray())
   }
 
   getValueOptionsArray(): FormArray {
@@ -82,7 +79,9 @@ export class FilterFieldDbEditorComponent implements OnInit {
   onSubmit(value: FilterFieldModel): void {
     this.dbService.createField(value)
       .subscribe(
-        response => console.log(response)
+        () => {
+          this.edit = !this.edit;
+        }
       )
   }
 

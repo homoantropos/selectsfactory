@@ -1,18 +1,18 @@
 <div class="main_container p-a-1">
 
   <ng-container *ngIf="showMainPage; else adminDashboard">
-    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o">
+    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
     </div>
 
-    <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o">
+    <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
       <app-request-spring
         [filterRequestInitValue]="filterRequestInitValue"
       ></app-request-spring>
 
     </div>
 
-    <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o">
+    <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
     </div>
   </ng-container>
