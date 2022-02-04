@@ -39,4 +39,8 @@ export class FilterRequestService {
     )
   }
 
+  removeField(fieldName: string): Observable<Array<FilterFieldModel>> {
+    return of(this.db.removeField(fieldName))
+  }
+
 }

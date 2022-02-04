@@ -80,6 +80,11 @@ export class MockDataBase {
     return response
   }
 
+  removeField(fieldName: string): Array<FilterFieldModel> {
+    this.db = this.db.filter(filterField => filterField.fieldName !== fieldName);
+    return this.db;
+  }
+
 }
 
 

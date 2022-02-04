@@ -79,6 +79,17 @@ export class FilterFieldDbEditorComponent implements OnInit {
     this.getValueOptionsArray().removeAt(index)
   }
 
+  removeField(fieldName: string): void {
+    this.dbService.removeField(fieldName)
+      .subscribe(
+        fields => {
+          FilterFieldsDashboardComponent.setFields(fields);
+          this.createForm();
+          this.edit = true;
+        }
+      )
+  }
+
   getValueOptionsArray(): FormArray {
     return this.filterFieldEditorForm.controls['valueOptions'] as FormArray;
   }
@@ -96,8 +107,13 @@ export class FilterFieldDbEditorComponent implements OnInit {
       )
       .subscribe(
         filterRequestInitValue => {
-          FilterFieldsDashboardComponent._filterRequestInitValue = filterRequestInitValue;
-          this.changeDetectionRef.detectChanges();
+          Object.keys(filterRequestInitValue)
+            .map(
+              fieldName => {
+                FilterFieldsDashboardComponent._filterRequestInitValue = {};
+                FilterFieldsDashboardComponent._filterRequestInitValue[fieldName] = filterRequestInitValue[fieldName];
+                this.changeDetectionRef.detectChanges();
+              })
         }
       )
   }

@@ -18,6 +18,10 @@ export class FilterFieldsDashboardComponent implements OnInit {
     return FilterFieldsDashboardComponent._fields;
   }
 
+  static setFields(fields: Array<FilterFieldModel>): void {
+    FilterFieldsDashboardComponent._fields = [...fields];
+  }
+
   static _filterRequestInitValue: FilterRequestInitValue = {};
 
   get filterRequestInitValue(): FilterRequestInitValue {

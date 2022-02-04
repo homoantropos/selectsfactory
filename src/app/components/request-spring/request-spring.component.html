@@ -1,6 +1,6 @@
 <div *ngIf="filterRequestForm; else loader">
   <form [formGroup]="filterRequestForm">
-    <mat-form-field *ngFor="let formControlName of formControlNames">
+    <mat-form-field *ngFor="let formControlName of formControlNames" class="col-sm-10 centerHorizontal">
       <mat-select formControlName="{{formControlName}}">
         <mat-option
           *ngFor="let value of selectOptions[formControlName]"
