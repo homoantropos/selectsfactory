@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {MainPageComponent} from './main-page/main-page.component';
+import {ShowRoomComponent} from './show-room/show-room.component';
 import {RequestSpringComponent} from './components/request-spring/request-spring.component';
 import {LoaderComponent} from './shared/ulils/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -21,7 +21,7 @@ import {MatIconModule} from "@angular/material/icon";
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
+    ShowRoomComponent,
     RequestSpringComponent,
     LoaderComponent,
     FilterFieldDbEditorComponent,

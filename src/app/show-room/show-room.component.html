@@ -22,7 +22,7 @@
   </ng-template>
 
 
-  <button mat-button color="primary" (click)="showAdmin()">
+  <button mat-button color="primary" (click)="showMainPage = !showMainPage">
     <span *ngIf="showMainPage; else admin">admin</span>
     <ng-template #admin><span>main</span></ng-template>
   </button>

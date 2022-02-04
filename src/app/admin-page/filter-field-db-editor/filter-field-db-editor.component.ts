@@ -73,6 +73,10 @@ export class FilterFieldDbEditorComponent implements OnInit {
     )
   }
 
+  removeValueOption(index: number): void {
+    this.getValueOptionsArray().removeAt(index)
+  }
+
   getValueOptionsArray(): FormArray {
     return this.filterFieldEditorForm.controls['valueOptions'] as FormArray;
   }

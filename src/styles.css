@@ -5,6 +5,15 @@
   transform: translate(-50%, -50%);
 }
 
+.centerHorizontal {
+  position: absolute;;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.toll{
+  height: 40px;
+}
 .main_container {
   width: 80%;
   height: 80vh;

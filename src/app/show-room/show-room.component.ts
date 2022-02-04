@@ -3,12 +3,12 @@ import {FilterRequestInitValue} from "../shared/config/types";
 import {FilterRequestService} from "../shared/services/filterRequetsServise";
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
+  selector: 'app-show-room',
+  templateUrl: './show-room.component.html',
+  styleUrls: ['./show-room.component.css']
 })
 
-export class MainPageComponent implements OnInit {
+export class ShowRoomComponent implements OnInit {
 
   filterRequestInitValue: FilterRequestInitValue = {};
   showMainPage = true;
@@ -24,9 +24,5 @@ export class MainPageComponent implements OnInit {
         this.filterRequestInitValue = filterRequestInitValue;
       }
     );
-  }
-
-  showAdmin(): void {
-    this.showMainPage = !this.showMainPage;
   }
 }
