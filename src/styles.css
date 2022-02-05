@@ -11,9 +11,10 @@
   transform: translate(-50%);
 }
 
-.toll{
+.toll {
   height: 40px;
 }
+
 .main_container {
   width: 80%;
   height: 80vh;
@@ -61,5 +62,15 @@ h1, h2, h3, h4, h5 {
   text-align: center;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.hidden {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

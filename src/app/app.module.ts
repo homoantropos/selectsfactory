@@ -17,6 +17,7 @@ import { FilterFieldsDashboardComponent } from './admin-page/filter-fields-dashb
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import { ReqStringHostDirective } from './shared/directives/req-string-host.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatIconModule} from "@angular/material/icon";
     LoaderComponent,
     FilterFieldDbEditorComponent,
     FilterFieldsListComponent,
-    FilterFieldsDashboardComponent
+    FilterFieldsDashboardComponent,
+    ReqStringHostDirective
   ],
     imports: [
         BrowserModule,

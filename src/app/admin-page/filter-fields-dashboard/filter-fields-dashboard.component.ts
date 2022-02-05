@@ -1,8 +1,17 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {FilterFieldModel} from "../../data/mockDb/models";
+import {
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
-import {FilterRequestInitValue} from "../../shared/config/types";
 import {switchMap} from "rxjs/operators";
+import {AdminMiddleware} from "../../shared/services/admin-middleware";
+import {FilterRequestInitValue} from "../../shared/config/types";
+import {ReqStringHostDirective} from "../../shared/directives/req-string-host.directive";
+import {RequestSpringComponent} from "../../components/request-spring/request-spring.component";
 
 @Component({
   selector: 'app-filter-fields-dashboard',
@@ -12,33 +21,16 @@ import {switchMap} from "rxjs/operators";
 
 export class FilterFieldsDashboardComponent implements OnInit {
 
-  static _fields: Array<FilterFieldModel> = [];
-
-  get fields() {
-    return FilterFieldsDashboardComponent._fields;
-  }
-
-  static setFields(fields: Array<FilterFieldModel>): void {
-    FilterFieldsDashboardComponent._fields = [...fields];
-  }
-
-  static _filterRequestInitValue: FilterRequestInitValue = {};
-
-  get filterRequestInitValue(): FilterRequestInitValue {
-    return FilterFieldsDashboardComponent._filterRequestInitValue
-  }
-
-  setFilterRequestInitValue(filterRequestInitValue: FilterRequestInitValue) {
-    FilterFieldsDashboardComponent._filterRequestInitValue = filterRequestInitValue;
-  }
-
-  @Input() field: string = '';
+  field: string = '';
   emptyDBMessage = '';
-  showEditor = false;
+  @Input() filterRequestInitValue: FilterRequestInitValue = {};
+  @ViewChild(ReqStringHostDirective, {static: true}) appReqStringHost!: ReqStringHostDirective;
 
   constructor(
     private frs: FilterRequestService,
-    private changeDetect: ChangeDetectorRef
+    private changeDetect: ChangeDetectorRef,
+    private resolver: ComponentFactoryResolver,
+    public admin: AdminMiddleware
   ) {
   }
 
@@ -47,7 +39,8 @@ export class FilterFieldsDashboardComponent implements OnInit {
       switchMap(
         response => {
           if (typeof response !== 'string') {
-            FilterFieldsDashboardComponent._fields = response
+            this.admin.setFields(response)
+            this.filterRequestInitValue = this.admin.filterRequestInitValue
           } else {
             this.emptyDBMessage = response;
           }
@@ -56,15 +49,26 @@ export class FilterFieldsDashboardComponent implements OnInit {
       )
     )
       .subscribe(
-        filterRequestInitValue => this.setFilterRequestInitValue(filterRequestInitValue)
+        filterRequestInitValue => {
+          this.admin.setFilterRequestInitValue(filterRequestInitValue);
+          this.loadReqString();
+        }
       );
   }
 
   editField(fieldName: string): void {
-    this.showEditor = !this.showEditor;
+    this.admin.showEditor = !this.admin.showEditor;
     this.field = fieldName;
     this.changeDetect.detectChanges();
-    this.showEditor = true;
+    this.admin.showEditor = true;
   }
 
+  loadReqString(): void {
+    const factory = this.resolver.resolveComponentFactory(RequestSpringComponent);
+    const viewContainerRef = this.appReqStringHost.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent<RequestSpringComponent>(factory);
+    componentRef.instance.filterRequestInitValue = this.admin.filterRequestInitValue;
+  }
 }

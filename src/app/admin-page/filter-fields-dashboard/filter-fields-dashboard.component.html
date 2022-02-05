@@ -2,7 +2,7 @@
 
   <ng-container *ngIf="(emptyDBMessage === ''); else emptyDbAlert">
     <app-filter-fields-list
-      [fields]="fields"
+      [fields] = "admin.fields"
       (fieldName)="editField($event)"
     ></app-filter-fields-list>
   </ng-container>
@@ -14,7 +14,8 @@
 </div>
 
 <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-  <ng-container class="col-sm-12" *ngIf="showEditor">
+  <ng-container class="col-sm-12" *ngIf="admin.showEditor">
+    <mat-icon class="pointer m-t-1" (click)="admin.showEditor = false">close</mat-icon>
     <app-filter-field-db-editor
       [fieldName]="field"
     ></app-filter-field-db-editor>
@@ -22,9 +23,8 @@
 </div>
 
 <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-  <app-request-spring class="col-sm-12"
-    [filterRequestInitValue]="filterRequestInitValue"
-  ></app-request-spring>
+  <button id="loadReqSpring" class="hidden" (click)="loadReqString()"></button>
+  <ng-template appReqStringHost></ng-template>
 </div>
 
 
