@@ -18,6 +18,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import { ReqStringHostDirective } from './shared/directives/req-string-host.directive';
+import { FieldNamesChoiceComponent } from './show-room/field-names-choice/field-names-choice.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReqStringHostDirective } from './shared/directives/req-string-host.dire
     FilterFieldDbEditorComponent,
     FilterFieldsListComponent,
     FilterFieldsDashboardComponent,
-    ReqStringHostDirective
+    ReqStringHostDirective,
+    FieldNamesChoiceComponent
   ],
     imports: [
         BrowserModule,
@@ -43,6 +45,9 @@ import { ReqStringHostDirective } from './shared/directives/req-string-host.dire
         MatInputModule,
         MatIconModule
     ],
+  entryComponents: [
+    RequestSpringComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FilterRequestInitValue} from "../shared/config/types";
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import {FilterRequestService} from "../shared/services/filterRequetsServise";
+import {AdminMiddleware} from "../shared/services/admin-middleware";
 
 @Component({
   selector: 'app-show-room',
@@ -10,19 +13,19 @@ import {FilterRequestService} from "../shared/services/filterRequetsServise";
 
 export class ShowRoomComponent implements OnInit {
 
-  filterRequestInitValue: FilterRequestInitValue = {};
   showMainPage = true;
 
   constructor(
-    private frService: FilterRequestService
+    private frService: FilterRequestService,
+    public adminMiddleware: AdminMiddleware
   ) {
   }
 
   ngOnInit(): void {
-    this.frService.getRequest(['years']).subscribe(
-      filterRequestInitValue => {
-        this.filterRequestInitValue = filterRequestInitValue;
-      }
-    );
+    // this.frService.getRequest(['years']).subscribe(
+    //   filterRequestInitValue => {
+    //     this.adminMiddleware.setFilterRequestInitValue(filterRequestInitValue);
+    //   }
+    // );
   }
 }

@@ -1,20 +1,36 @@
 <div class="main_container p-a-1">
-
   <ng-container *ngIf="showMainPage; else adminDashboard">
-    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
+
+    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <h4>назва ключа</h4>
+        </tr>
+        </thead>
+        <tbody *ngFor="let fieldName of adminMiddleware.fieldNames">
+        <tr>
+          <td>
+            {{fieldName}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
+
 
     <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
       <app-request-spring
-        [filterRequestInitValue]="filterRequestInitValue"
+        [filterRequestInitValue]="adminMiddleware.filterRequestInitValue"
       ></app-request-spring>
-
     </div>
+
 
     <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
     </div>
+
   </ng-container>
 
   <ng-template #adminDashboard>

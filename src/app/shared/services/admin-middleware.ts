@@ -10,7 +10,9 @@ export class AdminMiddleware {
 
   private _fields: Array<FilterFieldModel> = [];
   private _filterRequestInitValue: FilterRequestInitValue = {};
+  private _fieldNames: Array<string> = [];
 
+  emptyDbMessage = '';
   showEditor = false;
 
   get fields() {
@@ -27,5 +29,13 @@ export class AdminMiddleware {
 
   setFilterRequestInitValue(filterRequestInitValue: FilterRequestInitValue) {
     this._filterRequestInitValue = filterRequestInitValue;
+  }
+
+  get fieldNames(): Array<string> {
+    return this._fieldNames;
+  }
+
+  setFieldNames(fieldNames: Array<string>): void {
+    this._fieldNames = fieldNames;
   }
 }

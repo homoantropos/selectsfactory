@@ -81,9 +81,14 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
 
   removeField(fieldName: string): void {
     this.dbService.removeField(fieldName)
-      .subscribe(
-        fields => {
+      .pipe(
+        switchMap(fields => {
           this.admin.setFields(fields);
+          return this.dbService.getFieldsName();
+        }))
+      .subscribe(
+        fieldsName => {
+          this.admin.setFieldNames(fieldsName);
           this.createForm();
           setTimeout(() => this.nameInput.nativeElement.focus(), 0);
           this.admin.showEditor = false;
@@ -101,6 +106,12 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
         switchMap(
           (fields) => {
             this.admin.setFields(fields);
+            return this.dbService.getFieldsName()
+          }
+        ),
+        switchMap(
+          (fieldsName) => {
+            this.admin.setFieldNames(fieldsName);
             return this.dbService.getRequest()
           }
         )
@@ -112,7 +123,7 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
           const button = document.getElementById(
             'loadReqSpring'
           );
-          if(button) {
+          if (button) {
             button.click();
           }
         }
