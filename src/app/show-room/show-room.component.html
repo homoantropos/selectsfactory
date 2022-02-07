@@ -3,20 +3,9 @@
 
 
     <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <h4>назва ключа</h4>
-        </tr>
-        </thead>
-        <tbody *ngFor="let fieldName of adminMiddleware.fieldNames">
-        <tr>
-          <td>
-            {{fieldName}}
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <app-field-names-choice
+        [fieldNames]="adminMiddleware.fieldNames"
+      ></app-field-names-choice>
     </div>
 
 

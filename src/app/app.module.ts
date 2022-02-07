@@ -19,6 +19,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import { ReqStringHostDirective } from './shared/directives/req-string-host.directive';
 import { FieldNamesChoiceComponent } from './show-room/field-names-choice/field-names-choice.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FieldNamesChoiceComponent } from './show-room/field-names-choice/field-
         MatSelectModule,
         MatButtonModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        MatCheckboxModule
     ],
   entryComponents: [
     RequestSpringComponent

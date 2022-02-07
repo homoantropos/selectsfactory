@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormArray, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-field-names-choice',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldNamesChoiceComponent implements OnInit {
 
-  constructor() { }
+  @Input() fieldNames: Array<string> = [];
 
-  ngOnInit(): void {
+  // @ts-ignore
+
+  selectedFieldsForm: FormArray;
+
+  constructor(
+    private fb: FormBuilder
+  ) {
   }
 
+  ngOnInit(): void {
+    this.selectedFieldsForm = this.fb.array([])
+    this.createForm(this.fieldNames);
+  }
+
+  createForm(fieldNames: Array<string>): void {
+    fieldNames.map(
+      fieldName => {
+        this.fieldNameFormFields.push(
+          this.fb.control(`${fieldName}`)
+        )
+      }
+    )
+  }
+
+  get fieldNameFormFields(): FormArray {
+    return this.selectedFieldsForm as FormArray
+  }
 }

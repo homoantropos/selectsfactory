@@ -1,1 +1,17 @@
-<p>field-names-choice works!</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <h4>назва ключа</h4>
+  </tr>
+  </thead>
+  <tbody *ngFor="let fieldName of fieldNames">
+  <tr>
+    <td class="col-sm-1">
+      <mat-checkbox></mat-checkbox>
+    </td>
+    <td class="col-sm-11">
+      {{fieldName}}
+    </td>
+  </tr>
+  </tbody>
+</table>
