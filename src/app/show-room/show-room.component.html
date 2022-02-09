@@ -5,19 +5,25 @@
     <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
       <app-field-names-choice
         [fieldNames]="adminMiddleware.fieldNames"
+        (requestFields)="createSelect($event)"
       ></app-field-names-choice>
     </div>
 
 
     <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
       <app-request-spring
-        [filterRequestInitValue]="adminMiddleware.filterRequestInitValue"
+        [filterRequestInitValue]="filterRequestInitValue"
       ></app-request-spring>
     </div>
 
 
     <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-
+      <app-field-names-choice
+        [fieldNames]="shownSelectsNames"
+      ></app-field-names-choice>
+      <p>
+        {{filterRequestInitValue | json}}
+      </p>
     </div>
 
   </ng-container>

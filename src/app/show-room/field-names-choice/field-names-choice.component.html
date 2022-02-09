@@ -4,10 +4,22 @@
     <h4>назва ключа</h4>
   </tr>
   </thead>
-  <tbody *ngFor="let fieldName of fieldNames">
+  <tbody >
   <tr>
     <td class="col-sm-1">
-      <mat-checkbox></mat-checkbox>
+      <mat-checkbox
+        (click)="produceRequest('years')"
+      ></mat-checkbox>
+    </td>
+    <td class="col-sm-11">
+      years
+    </td>
+  </tr>
+  <tr *ngFor="let fieldName of fieldNames">
+    <td class="col-sm-1">
+      <mat-checkbox
+        (click)="produceRequest(fieldName)"
+      ></mat-checkbox>
     </td>
     <td class="col-sm-11">
       {{fieldName}}

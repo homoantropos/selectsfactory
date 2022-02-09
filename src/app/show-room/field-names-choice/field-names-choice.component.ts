@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AdminMiddleware} from "../../shared/services/admin-middleware";
 
 @Component({
   selector: 'app-field-names-choice',
@@ -9,32 +9,27 @@ import {FormArray, FormBuilder} from "@angular/forms";
 export class FieldNamesChoiceComponent implements OnInit {
 
   @Input() fieldNames: Array<string> = [];
+  @Output() requestFields: EventEmitter<Array<string>> = new EventEmitter<Array<string>>();
 
-  // @ts-ignore
+  request: Array<string> = [];
 
-  selectedFieldsForm: FormArray;
-
-  constructor(
-    private fb: FormBuilder
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.selectedFieldsForm = this.fb.array([])
-    this.createForm(this.fieldNames);
   }
 
-  createForm(fieldNames: Array<string>): void {
-    fieldNames.map(
-      fieldName => {
-        this.fieldNameFormFields.push(
-          this.fb.control(`${fieldName}`)
-        )
-      }
-    )
+  produceRequest(fieldName: string): void {
+    let req = [];
+    if(this.request.includes(fieldName.toLowerCase())) {
+      console.log(this.request);
+     req = this.request.filter( fN => fN === fieldName);
+      console.log(this.request);
+    } else {
+      this.request.push(fieldName);
+      req = this.request;
+    }
+    this.requestFields.emit(req);
   }
 
-  get fieldNameFormFields(): FormArray {
-    return this.selectedFieldsForm as FormArray
-  }
 }

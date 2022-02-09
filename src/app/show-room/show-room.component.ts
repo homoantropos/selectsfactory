@@ -1,17 +1,19 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {FilterRequestService} from "../shared/services/filterRequetsServise";
 import {AdminMiddleware} from "../shared/services/admin-middleware";
+import {FilterRequestInitValue} from "../shared/config/types";
 
 @Component({
   selector: 'app-show-room',
   templateUrl: './show-room.component.html',
-  styleUrls: ['./show-room.component.css']
+  styleUrls: ['./show-room.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class ShowRoomComponent implements OnInit {
+
+  @Input() shownSelectsNames: Array<string> = [];
+  filterRequestInitValue: FilterRequestInitValue = {};
 
   showMainPage = true;
 
@@ -22,10 +24,16 @@ export class ShowRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.frService.getRequest(['years']).subscribe(
-    //   filterRequestInitValue => {
-    //     this.adminMiddleware.setFilterRequestInitValue(filterRequestInitValue);
-    //   }
-    // );
+
+  }
+
+  createSelect(shownSelectsNames: Array<string>) {
+    console.log(shownSelectsNames);
+    this.shownSelectsNames = shownSelectsNames.slice();
+    this.frService.getRequest(this.shownSelectsNames).subscribe(
+      filterRequestInitValue => {
+        this.filterRequestInitValue = filterRequestInitValue;
+      }
+    );
   }
 }
