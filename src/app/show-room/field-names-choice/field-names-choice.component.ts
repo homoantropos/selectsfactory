@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AdminMiddleware} from "../../shared/services/admin-middleware";
 
 @Component({
   selector: 'app-field-names-choice',
@@ -20,11 +19,9 @@ export class FieldNamesChoiceComponent implements OnInit {
   }
 
   produceRequest(fieldName: string): void {
-    let req = [];
+    let req;
     if(this.request.includes(fieldName.toLowerCase())) {
-      console.log(this.request);
      req = this.request.filter( fN => fN === fieldName);
-      console.log(this.request);
     } else {
       this.request.push(fieldName);
       req = this.request;

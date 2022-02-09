@@ -1,4 +1,10 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input, OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../shared/config/types";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -12,6 +18,7 @@ export class RequestSpringComponent implements OnInit, OnChanges {
   // @ts-ignore
   @Input() filterRequestInitValue: FilterRequestInitValue;
   @Output() filterRequest: EventEmitter<FilterRequest> = new EventEmitter<FilterRequest>();
+
   // @ts-ignore
   filterRequestForm: FormGroup;
   filterRequestFormValues: Array<FilterRequest> = [];
