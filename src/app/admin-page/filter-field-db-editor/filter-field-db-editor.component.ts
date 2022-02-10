@@ -84,13 +84,25 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap(fields => {
           this.admin.setFields(fields);
-          return this.dbService.getFieldsName();
-        }))
+          return this.dbService.getRequest();
+        }),
+        switchMap(
+          filterRequestFilterValue => {
+            this.admin.setFilterRequestInitValue(filterRequestFilterValue);
+            return this.dbService.getFieldsName();
+          }
+        )
+      )
       .subscribe(
         fieldsName => {
           this.admin.setFieldNames(fieldsName);
           this.createForm();
-          setTimeout(() => this.nameInput.nativeElement.focus(), 0);
+          const button = document.getElementById(
+            'loadReqSpring'
+          );
+          if (button) {
+            button.click();
+          }
           this.admin.showEditor = false;
         }
       )
