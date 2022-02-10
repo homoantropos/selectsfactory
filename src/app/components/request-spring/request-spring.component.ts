@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input, OnChanges,
-  OnInit,
-  Output
-} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../shared/config/types";
 import {FormBuilder, FormGroup} from "@angular/forms";
 

@@ -19,14 +19,12 @@ export class FieldNamesChoiceComponent implements OnInit {
   }
 
   produceRequest(fieldName: string): void {
-    let req;
     if(this.request.includes(fieldName.toLowerCase())) {
-     req = this.request.filter( fN => fN === fieldName);
+     this.request = this.request.filter( fN => fN !== fieldName);
     } else {
       this.request.push(fieldName);
-      req = this.request;
     }
-    this.requestFields.emit(req);
+    this.requestFields.emit(this.request);
   }
 
 }
