@@ -17,6 +17,8 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
   // @ts-ignore
   @ViewChild('nameInput') private nameInput: ElementRef;
   // @ts-ignore
+  @ViewChild('lastOne') private newInputForFocus: ElementRef;
+  // @ts-ignore
   filterFieldEditorForm: FormGroup;
   edit = false;
 
@@ -73,6 +75,9 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
         option: [option, Validators.required]
       })
     )
+    if (this.newInputForFocus) {
+      setTimeout(() => this.newInputForFocus.nativeElement.focus(), 0);
+    }
   }
 
   removeValueOption(index: number): void {

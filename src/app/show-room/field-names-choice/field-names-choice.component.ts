@@ -5,6 +5,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   templateUrl: './field-names-choice.component.html',
   styleUrls: ['./field-names-choice.component.css']
 })
+
 export class FieldNamesChoiceComponent implements OnInit {
 
   @Input() fieldNames: Array<string> = [];

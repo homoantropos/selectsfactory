@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../shared/config/types";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./request-spring.component.css']
 })
 
-export class RequestSpringComponent implements OnInit, OnChanges {
+export class RequestSpringComponent implements OnInit {
   // @ts-ignore
   @Input() filterRequestInitValue: FilterRequestInitValue;
   @Output() filterRequest: EventEmitter<FilterRequest> = new EventEmitter<FilterRequest>();
@@ -26,10 +26,6 @@ export class RequestSpringComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.filterRequestForm = this.createForm(this.filterRequestInitValue);
     this.formControlNames = Object.keys(this.filterRequestFormValues);
-  }
-
-  ngOnChanges() {
-    this.ngOnInit();
   }
 
   fetchRequest(value: FilterRequest): void {

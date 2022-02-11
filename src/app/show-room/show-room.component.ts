@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FilterRequestService} from "../shared/services/filterRequetsServise";
 import {AdminMiddleware} from "../shared/services/admin-middleware";
 import {FilterRequestInitValue} from "../shared/config/types";
@@ -6,8 +6,7 @@ import {FilterRequestInitValue} from "../shared/config/types";
 @Component({
   selector: 'app-show-room',
   templateUrl: './show-room.component.html',
-  styleUrls: ['./show-room.component.css'],
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./show-room.component.css']
 })
 
 export class ShowRoomComponent implements OnInit {
