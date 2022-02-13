@@ -37,7 +37,9 @@ export class AppComponent implements OnInit {
     )
       .subscribe(
         filterRequestInitValue => {
-          this.admin.setFilterRequestInitValue(filterRequestInitValue);
+          if(typeof filterRequestInitValue !== 'string') {
+            this.admin.setFilterRequestInitValue(filterRequestInitValue);
+          }
         }
       );
   }

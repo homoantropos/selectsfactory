@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FilterFieldModel} from "../../data/mockDb/models";
 
 @Component({
@@ -7,7 +7,7 @@ import {FilterFieldModel} from "../../data/mockDb/models";
   styleUrls: ['./filter-fields-list.component.css']
 })
 
-export class FilterFieldsListComponent implements OnInit {
+export class FilterFieldsListComponent implements OnInit, OnDestroy {
 
   @Input() fields: Array<FilterFieldModel> = [];
   @Output() fieldName: EventEmitter<string> = new EventEmitter<string>();
@@ -19,6 +19,10 @@ export class FilterFieldsListComponent implements OnInit {
 
   emitFieldForEditor(fieldName: string): void {
     this.fieldName.emit(fieldName)
+  }
+
+  ngOnDestroy(): void {
+   return this.emitFieldForEditor('close editor');
   }
 
 }

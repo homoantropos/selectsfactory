@@ -15,24 +15,24 @@ export class MockDataBase {
   }
 
   private _db: Array<FilterFieldModel> = [
-    {
-      fieldName: 'direction',
-      initValue: '',
-      valueOptions: [
-        {option: 'One', value: 'One'},
-        {option: 'Two', value: 'Two'},
-        {option: 'Three', value: 'Three'}
-      ]
-    },
-    {
-      fieldName: 'participants',
-      initValue: '',
-      valueOptions: [
-        {value: 'schoolchild', option: 'Учні'},
-        {value: 'students', option: 'Студенти'},
-        {value: '', option: 'Учні і студенти разом'}
-      ]
-    }
+    // {
+    //   fieldName: 'direction',
+    //   initValue: '',
+    //   valueOptions: [
+    //     {option: 'One', value: 'One'},
+    //     {option: 'Two', value: 'Two'},
+    //     {option: 'Three', value: 'Three'}
+    //   ]
+    // },
+    // {
+    //   fieldName: 'participants',
+    //   initValue: '',
+    //   valueOptions: [
+    //     {value: 'schoolchild', option: 'Учні'},
+    //     {value: 'students', option: 'Студенти'},
+    //     {value: '', option: 'Учні і студенти разом'}
+    //   ]
+    // }
   ]
 
   set db(value: Array<FilterFieldModel>) {
@@ -53,9 +53,7 @@ export class MockDataBase {
     let response: FilterRequestInitValue = {};
     this._db.map(
       filterField => {
-        if (
-          !values?.includes(filterField.fieldName.toLowerCase())
-        ) {
+        if (!values?.includes(filterField.fieldName.toLowerCase())) {
           response[filterField.fieldName] = {
             initValue: filterField.initValue,
             valueOptions: filterField.valueOptions
@@ -70,14 +68,7 @@ export class MockDataBase {
 
   getFilterFieldByKey(fieldName: string): FilterFieldModel | string {
     const filterField = this.db.filter(filterField => filterField.fieldName === fieldName)[0];
-    let response;
-    if (filterField) {
-      response = filterField
-    } else {
-      response = 'Такого поля не існує'
-      console.log(response)
-    }
-    return response
+    return filterField
   }
 
   getFieldsName(): Array<string> {

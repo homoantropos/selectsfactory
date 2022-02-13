@@ -1,6 +1,6 @@
 <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
 
-  <ng-container *ngIf="(emptyDBMessage === ''); else emptyDbAlert">
+  <ng-container *ngIf="!admin.dbIsEmpty(); else emptyDbAlert">
     <app-filter-fields-list
       [fields] = "admin.fields"
       (fieldName)="editField($event)"
@@ -8,15 +8,16 @@
   </ng-container>
 
   <ng-template #emptyDbAlert>
-    <h3 class="centerVertical">{{emptyDBMessage}}</h3>
+    <h3 class="centerVertical">База даних порожня</h3>
+    <mat-icon class="m-t-3 centerVertical pointer" (click)="closeEditor(false)">add</mat-icon>
   </ng-template>
-
 </div>
 
 <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-  <ng-container class="col-sm-12" *ngIf="admin.showEditor">
-    <mat-icon class="pointer m-t-1" (click)="admin.showEditor = false">close</mat-icon>
+  <ng-container class="col-sm-12" *ngIf="showEditor">
+    <mat-icon class="pointer m-t-1" (click)="closeEditor(true)">close</mat-icon>
     <app-filter-field-db-editor
+      (hideMe) = "closeEditor($event)"
       [fieldName]="field"
     ></app-filter-field-db-editor>
   </ng-container>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FilterFieldModel} from "../../data/mockDb/models";
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
@@ -14,13 +14,14 @@ import {AdminMiddleware} from "../../shared/services/admin-middleware";
 export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
 
   @Input() fieldName: string = '';
+  @Output() hideMe: EventEmitter<boolean> = new EventEmitter<boolean>()
   // @ts-ignore
   @ViewChild('nameInput') private nameInput: ElementRef;
   // @ts-ignore
   @ViewChild('lastOne') private newInputForFocus: ElementRef;
   // @ts-ignore
   filterFieldEditorForm: FormGroup;
-  edit = false;
+  edit = true;
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +31,8 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.fieldName.length > 0) {
+    if (this.fieldName.length > 0 && this.fieldName !== 'close editor') {
+      this.edit = false;
       this.dbService.getFilterFieldByKey(this.fieldName)
         .subscribe(
           response => {
@@ -84,16 +86,20 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
     this.getValueOptionsArray().removeAt(index)
   }
 
-  removeField(fieldName: string): void {
-    this.dbService.removeField(fieldName)
+  removeField(): void {
+    this.dbService.removeField(this.fieldName)
       .pipe(
         switchMap(fields => {
           this.admin.setFields(fields);
+          this.fieldName = '';
           return this.dbService.getRequest();
         }),
         switchMap(
-          filterRequestFilterValue => {
-            this.admin.setFilterRequestInitValue(filterRequestFilterValue);
+          filterRequestInitValue => {
+            this.admin.setFilterRequestInitValue(filterRequestInitValue);
+            if(this.admin.dbIsEmpty()){
+              this.edit = true;
+            }
             return this.dbService.getFieldsName();
           }
         )
@@ -108,7 +114,7 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
           if (button) {
             button.click();
           }
-          this.admin.showEditor = false;
+          this.hideMe.emit(true);
         }
       )
   }
@@ -118,6 +124,7 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(value: FilterFieldModel): void {
+    this.fieldName = value.fieldName;
     this.dbService.createField(value)
       .pipe(
         switchMap(
@@ -136,23 +143,15 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
       .subscribe(
         filterRequestInitValue => {
           this.admin.setFilterRequestInitValue(filterRequestInitValue);
-          this.edit = !this.edit;
-          const button = document.getElementById(
-            'loadReqSpring'
-          );
-          if (button) {
-            button.click();
-          }
+          this.edit = false;
+          const button = document.getElementById('loadReqSpring');
+          if (button) button.click();
         }
       )
   }
 
-  changeEdit(): void {
-    this.edit = true;
-    setTimeout(() => this.nameInput.nativeElement.focus(), 0);
-  }
-
   ngOnDestroy(): void {
-    this.admin.showEditor = false;
+    this.edit = true;
+    this.hideMe.emit(true);
   }
 }

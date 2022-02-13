@@ -38,4 +38,10 @@ export class AdminMiddleware {
   setFieldNames(fieldNames: Array<string>): void {
     this._fieldNames = fieldNames;
   }
+
+  dbIsEmpty(): boolean {
+    return Object.keys(
+      this.filterRequestInitValue
+    ).length === 0
+  }
 }

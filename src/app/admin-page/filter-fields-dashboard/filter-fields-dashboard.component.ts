@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ComponentFactoryResolver,
-  Input,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import {ChangeDetectorRef, Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 import {switchMap} from "rxjs/operators";
 import {AdminMiddleware} from "../../shared/services/admin-middleware";
@@ -21,9 +14,9 @@ import {RequestSpringComponent} from "../../components/request-spring/request-sp
 
 export class FilterFieldsDashboardComponent implements OnInit {
 
-  field: string = '';
-  emptyDBMessage = '';
+  @Input() field: string = '';
   @Input() filterRequestInitValue: FilterRequestInitValue = {};
+  @Input() showEditor: boolean = false;
   @ViewChild(ReqStringHostDirective, {static: true}) appReqStringHost!: ReqStringHostDirective;
 
   constructor(
@@ -38,29 +31,36 @@ export class FilterFieldsDashboardComponent implements OnInit {
     this.frs.getFilterFields().pipe(
       switchMap(
         response => {
-          if (typeof response !== 'string') {
-            this.admin.setFields(response)
-            this.filterRequestInitValue = this.admin.filterRequestInitValue
-          } else {
-            this.emptyDBMessage = response;
-          }
+          this.admin.setFields(response)
+          this.filterRequestInitValue = this.admin.filterRequestInitValue
           return this.frs.getRequest()
         }
       )
-    )
-      .subscribe(
-        filterRequestInitValue => {
-          this.admin.setFilterRequestInitValue(filterRequestInitValue);
-          this.loadReqString();
-        }
-      );
+    ).subscribe(
+      response => {
+        this.admin.setFilterRequestInitValue(response);
+        this.loadReqString();
+      }
+    );
   }
 
   editField(fieldName: string): void {
-    this.admin.showEditor = !this.admin.showEditor;
+    this.showEditor = !this.showEditor;
     this.field = fieldName;
     this.changeDetect.detectChanges();
-    this.admin.showEditor = true;
+    switch (fieldName) {
+      case ('') :
+        this.showEditor = true;
+        break;
+      case ('close editor') :
+        this.showEditor = false;
+        break;
+      default: this.showEditor = true;
+    }
+  }
+
+  closeEditor(closeEditor: boolean): void {
+    this.showEditor = !closeEditor;
   }
 
   loadReqString(): void {

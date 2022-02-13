@@ -3,7 +3,6 @@ import {MockDataBase} from "../../data/mockDb/mockDataBase";
 import {Observable, of} from "rxjs";
 import {FilterRequestInitValue} from "../config/types";
 import {FilterFieldModel} from "../../data/mockDb/models";
-import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +19,15 @@ export class FilterRequestService {
   }
 
   getRequest(values?: Array<string>): Observable<FilterRequestInitValue> {
-    return of(
-      this.db.getFilterRequestInitValue(values)
-    )
+    return of(this.db.getFilterRequestInitValue(values))
   }
 
   getFilterFieldByKey(key: string): Observable<FilterFieldModel | string> {
     return of(this.db.getFilterFieldByKey(key));
   }
 
-  getFilterFields(): Observable<Array<FilterFieldModel> | string> {
-    return of(
-      this.db.db
-    ).pipe(
-      map(
-        db => {return (db.length === 0) ?  "База фільтрів порожня" : db;}
-      )
-    )
+  getFilterFields(): Observable<Array<FilterFieldModel>> {
+    return of(this.db.db);
   }
 
   getFieldsName(): Observable<Array<string>> {

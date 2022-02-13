@@ -31,6 +31,7 @@ export class ShowRoomComponent implements OnInit {
     this.shownSelectsNames = shownSelectsNames.slice();
     this.frService.getRequest(this.shownSelectsNames).subscribe(
       filterRequestInitValue => {
+        if(typeof filterRequestInitValue !== "string")
         this.filterRequestInitValue = filterRequestInitValue;
       }
     );
