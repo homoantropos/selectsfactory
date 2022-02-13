@@ -33,7 +33,7 @@ export class FilterFieldsDashboardComponent implements OnInit {
         response => {
           this.admin.setFields(response)
           this.filterRequestInitValue = this.admin.filterRequestInitValue
-          return this.frs.getRequest()
+          return this.frs.getFullRequest()
         }
       )
     ).subscribe(

@@ -53,7 +53,7 @@ export class MockDataBase {
     let response: FilterRequestInitValue = {};
     this._db.map(
       filterField => {
-        if (!values?.includes(filterField.fieldName.toLowerCase())) {
+        if (values?.includes(filterField.fieldName.toLowerCase())) {
           response[filterField.fieldName] = {
             initValue: filterField.initValue,
             valueOptions: filterField.valueOptions
@@ -63,6 +63,18 @@ export class MockDataBase {
     if (values?.includes('years')) {
       response = this.dbService.addYear(response);
     }
+    return response;
+  }
+
+  getFullFilterRequestInitValue(): FilterRequestInitValue {
+    let response: FilterRequestInitValue = {};
+    this._db.map(
+      filterField => {
+        response[filterField.fieldName] = {
+          initValue: filterField.initValue,
+          valueOptions: filterField.valueOptions
+        }
+      });
     return response;
   }
 

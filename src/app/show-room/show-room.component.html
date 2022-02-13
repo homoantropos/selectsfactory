@@ -10,18 +10,36 @@
 
 
     <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <app-request-spring
-        [filterRequestInitValue]="filterRequestInitValue"
-      ></app-request-spring>
+      <h4 class="centerHorizontal">Обрані селекти</h4>
+      <ng-container *ngIf="showSelects" class="m-t-2">
+        <app-request-spring
+          (filterRequest)="getQueryValues($event)"
+          [filterRequestInitValue]="filterRequestInitValue"
+        ></app-request-spring>
+      </ng-container>
+      <button
+        class="centerHorizontal m-t-2"
+        mat-button color="primary"
+        (click)="showSelects=!showSelects"
+        *ngIf="!showSelects"
+        [disabled]="!emptyQuery()"
+      >
+        {{'show selects'}}
+      </button>
+      <button
+        class="centerHorizontal m-t-2"
+        mat-button color="primary"
+        (click)="closeSelects()"
+        *ngIf="showSelects"
+      >
+        {{'close selects'}}
+      </button>
     </div>
 
 
     <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <app-field-names-choice
-        [fieldNames]="shownSelectsNames"
-      ></app-field-names-choice>
       <p>
-        {{filterRequestInitValue | json}}
+        {{queryValues | json}}
       </p>
     </div>
 

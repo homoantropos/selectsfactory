@@ -22,6 +22,11 @@ export class FilterRequestService {
     return of(this.db.getFilterRequestInitValue(values))
   }
 
+  getFullRequest(): Observable<FilterRequestInitValue> {
+    return of(this.db.getFullFilterRequestInitValue())
+  }
+
+
   getFilterFieldByKey(key: string): Observable<FilterFieldModel | string> {
     return of(this.db.getFilterFieldByKey(key));
   }

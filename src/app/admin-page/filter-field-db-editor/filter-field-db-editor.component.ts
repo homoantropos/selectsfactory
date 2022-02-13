@@ -92,7 +92,7 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
         switchMap(fields => {
           this.admin.setFields(fields);
           this.fieldName = '';
-          return this.dbService.getRequest();
+          return this.dbService.getFullRequest();
         }),
         switchMap(
           filterRequestInitValue => {
@@ -136,7 +136,7 @@ export class FilterFieldDbEditorComponent implements OnInit, OnDestroy {
         switchMap(
           (fieldsName) => {
             this.admin.setFieldNames(fieldsName);
-            return this.dbService.getRequest()
+            return this.dbService.getFullRequest()
           }
         )
       )
