@@ -11,6 +11,7 @@
 
     <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
       <h4 class="centerHorizontal">Обрані селекти</h4>
+
       <ng-container *ngIf="showSelects" class="m-t-2">
         <app-request-spring
           (filterRequest)="getQueryValues($event)"
@@ -38,6 +39,7 @@
 
 
     <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
+      <ng-template appReqStringHost></ng-template>
       <p>
         {{queryValues | json}}
       </p>

@@ -79,8 +79,7 @@ export class MockDataBase {
   }
 
   getFilterFieldByKey(fieldName: string): FilterFieldModel | string {
-    const filterField = this.db.filter(filterField => filterField.fieldName === fieldName)[0];
-    return filterField
+    return this.db.filter(filterField => filterField.fieldName === fieldName)[0];
   }
 
   getFieldsName(): Array<string> {

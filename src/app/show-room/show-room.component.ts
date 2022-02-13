@@ -13,7 +13,7 @@ export class ShowRoomComponent implements OnInit, OnDestroy {
 
   @Input() shownSelectsNames: Array<string> = [];
   @Input() queryValues: FilterRequest = {};
-  filterRequestInitValue: FilterRequestInitValue = {};
+  @Input() filterRequestInitValue: FilterRequestInitValue = {};
 
   showMainPage = true;
   showSelects = false;
@@ -25,7 +25,6 @@ export class ShowRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
   }
 
   createSelect(shownSelectsNames: Array<string>) {
