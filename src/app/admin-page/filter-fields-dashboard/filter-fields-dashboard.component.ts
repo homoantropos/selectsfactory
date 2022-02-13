@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, ComponentFactoryResolver, Input, OnInit, V
 import {FilterRequestService} from "../../shared/services/filterRequetsServise";
 import {switchMap} from "rxjs/operators";
 import {AdminMiddleware} from "../../shared/services/admin-middleware";
-import {FilterRequestInitValue} from "../../shared/config/types";
+import {FilterRequest, FilterRequestInitValue} from "../../shared/config/types";
 import {ReqStringHostDirective} from "../../shared/directives/req-string-host.directive";
 import {RequestSpringComponent} from "../../components/request-spring/request-spring.component";
 
@@ -18,6 +18,8 @@ export class FilterFieldsDashboardComponent implements OnInit {
   @Input() filterRequestInitValue: FilterRequestInitValue = {};
   @Input() showEditor: boolean = false;
   @ViewChild(ReqStringHostDirective, {static: true}) appReqStringHost!: ReqStringHostDirective;
+
+  queryRequest: FilterRequest = {};
 
   constructor(
     private frs: FilterRequestService,
@@ -61,6 +63,7 @@ export class FilterFieldsDashboardComponent implements OnInit {
 
   closeEditor(closeEditor: boolean): void {
     this.showEditor = !closeEditor;
+    this.queryRequest = {};
   }
 
   loadReqString(): void {
@@ -70,5 +73,10 @@ export class FilterFieldsDashboardComponent implements OnInit {
 
     const componentRef = viewContainerRef.createComponent<RequestSpringComponent>(factory);
     componentRef.instance.filterRequestInitValue = this.admin.filterRequestInitValue;
-  }
+    componentRef.instance.filterRequest.subscribe(
+      filterRequest => {
+        this.queryRequest = filterRequest;
+      })
+      }
+
 }

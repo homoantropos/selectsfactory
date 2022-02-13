@@ -21,6 +21,11 @@
       [fieldName]="field"
     ></app-filter-field-db-editor>
   </ng-container>
+  <ng-container class="col-sm-12" *ngIf="!showEditor">
+    <div class="centerVertical m-b-1">
+      {{queryRequest | json}}
+    </div>
+  </ng-container>
 </div>
 
 <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
