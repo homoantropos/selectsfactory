@@ -13,7 +13,6 @@ export class AdminMiddleware {
   private _fieldNames: Array<string> = [];
 
   emptyDbMessage = '';
-  showEditor = false;
 
   get fields() {
     return this._fields;

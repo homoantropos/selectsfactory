@@ -71,6 +71,8 @@ export class FilterFieldsDashboardComponent implements OnInit {
     const viewContainerRef = this.appReqStringHost.viewContainerRef;
     viewContainerRef.clear();
 
+    console.log('im worked');
+
     const componentRef = viewContainerRef.createComponent<RequestSpringComponent>(factory);
     componentRef.instance.filterRequestInitValue = this.admin.filterRequestInitValue;
     componentRef.instance.filterRequest.subscribe(
