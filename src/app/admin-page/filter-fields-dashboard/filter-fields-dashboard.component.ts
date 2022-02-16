@@ -4,7 +4,7 @@ import {switchMap} from "rxjs/operators";
 import {AdminMiddleware} from "../../shared/services/admin-middleware";
 import {FilterRequest, FilterRequestInitValue} from "../../shared/config/types";
 import {ReqStringHostDirective} from "../../shared/directives/req-string-host.directive";
-import {RequestSpringComponent} from "../../components/request-spring/request-spring.component";
+import {RequestSpringComponent} from "../../shared/components/request-spring/request-spring.component";
 
 @Component({
   selector: 'app-filter-fields-dashboard',

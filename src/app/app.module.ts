@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {ShowRoomComponent} from './show-room/show-room.component';
-import {RequestSpringComponent} from './components/request-spring/request-spring.component';
+import {RequestSpringComponent} from './shared/components/request-spring/request-spring.component';
 import {LoaderComponent} from './shared/ulils/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
