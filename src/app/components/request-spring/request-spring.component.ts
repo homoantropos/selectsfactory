@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {FilterRequest, FilterRequestInitValue, SelectInitOptions} from "../../shared/config/types";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -19,24 +28,15 @@ export class RequestSpringComponent implements OnInit, OnChanges {
   formControlNames: Array<string>;
   selectOptions: SelectInitOptions = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private cd: ChangeDetectorRef
+  ) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    Object.keys(changes.filterRequestInitValue.currentValue).map(
-      key => {
-        // @ts-ignore
-        this.filterRequestInitValue[key] = changes.filterRequestInitValue.currentValue[key];
-      }
-    );
-    Object.keys(this.filterRequestInitValue).map(
-      key => {
-        if(!changes.filterRequestInitValue.currentValue[key]) {
-          delete this.filterRequestInitValue[key];
-        }
-      }
-    )
-    this.ngOnInit();
+  ngOnChanges(changes:SimpleChanges) {
+    this.filterRequestForm = this.createForm(changes.filterRequestInitValue.currentValue);
+    this.formControlNames = Object.keys(changes.filterRequestInitValue.currentValue);
   }
 
   ngOnInit(): void {

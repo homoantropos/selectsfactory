@@ -15,8 +15,6 @@ export class ShowRoomComponent implements OnInit {
   @Input() queryValues: FilterRequest = {};
   @Input() filterRequestInitValue: FilterRequestInitValue = {};
 
-  showMainPage = true;
-
   constructor(
     private frService: FilterRequestService,
     public adminMiddleware: AdminMiddleware
