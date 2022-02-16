@@ -34,8 +34,6 @@ export class RequestSpringComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes:SimpleChanges) {
     this.filterRequestForm = this.createForm(changes.filterRequestInitValue.currentValue);
-    console.log(changes.filterRequestInitValue.currentValue);
-    console.log(this.filterRequestForm.value);
     this.formControlNames = Object.keys(changes.filterRequestInitValue.currentValue);
   }
 
