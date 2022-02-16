@@ -15,24 +15,24 @@ export class MockDataBase {
   }
 
   private _db: Array<FilterFieldModel> = [
-    // {
-    //   fieldName: 'direction',
-    //   initValue: '',
-    //   valueOptions: [
-    //     {option: 'One', value: 'One'},
-    //     {option: 'Two', value: 'Two'},
-    //     {option: 'Three', value: 'Three'}
-    //   ]
-    // },
-    // {
-    //   fieldName: 'participants',
-    //   initValue: '',
-    //   valueOptions: [
-    //     {value: 'schoolchild', option: 'Учні'},
-    //     {value: 'students', option: 'Студенти'},
-    //     {value: '', option: 'Учні і студенти разом'}
-    //   ]
-    // }
+    {
+      fieldName: 'direction',
+      initValue: '',
+      valueOptions: [
+        {option: 'One', value: 'One'},
+        {option: 'Two', value: 'Two'},
+        {option: 'Three', value: 'Three'}
+      ]
+    },
+    {
+      fieldName: 'participants',
+      initValue: '',
+      valueOptions: [
+        {value: 'schoolchild', option: 'Учні'},
+        {value: 'students', option: 'Студенти'},
+        {value: '', option: 'Учні і студенти разом'}
+      ]
+    }
   ]
 
   set db(value: Array<FilterFieldModel>) {
