@@ -33,6 +33,7 @@ export class ShowRoomComponent implements OnInit {
   }
 
   getQueryValues(filterRequest: FilterRequest): void {
+    this.queryValues = {}
     this.queryValues = filterRequest;
   }
 

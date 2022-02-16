@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -29,8 +28,7 @@ export class RequestSpringComponent implements OnInit, OnChanges {
   selectOptions: SelectInitOptions = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef
+    private formBuilder: FormBuilder
   ) {
   }
 
