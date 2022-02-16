@@ -12,8 +12,6 @@ export class AdminMiddleware {
   private _filterRequestInitValue: FilterRequestInitValue = {};
   private _fieldNames: Array<string> = [];
 
-  emptyDbMessage = '';
-
   get fields() {
     return this._fields;
   }

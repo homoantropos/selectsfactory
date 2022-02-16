@@ -1,4 +1,5 @@
 <div class="main_container p-a-1">
+
   <ng-container *ngIf="showRoom; else adminDashboard">
     <app-show-room></app-show-room>
   </ng-container>
@@ -12,6 +13,5 @@
     <span *ngIf="showRoom; else admin">admin</span>
     <ng-template #admin><span>main</span></ng-template>
   </button>
-
 
 </div>

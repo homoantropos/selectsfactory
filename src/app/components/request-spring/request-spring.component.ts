@@ -12,7 +12,6 @@ export class RequestSpringComponent implements OnInit, OnChanges {
   // @ts-ignore
   @Input() filterRequestInitValue: FilterRequestInitValue;
   @Output() filterRequest: EventEmitter<FilterRequest> = new EventEmitter<FilterRequest>();
-
   // @ts-ignore
   filterRequestForm: FormGroup;
   filterRequestFormValues: Array<FilterRequest> = [];
@@ -37,12 +36,10 @@ export class RequestSpringComponent implements OnInit, OnChanges {
         }
       }
     )
-    console.log(this.filterRequestInitValue);
     this.ngOnInit();
   }
 
   ngOnInit(): void {
-    console.log('ImWorked in ngOnitin');
     this.filterRequestForm = this.createForm(this.filterRequestInitValue);
     this.formControlNames = Object.keys(this.filterRequestFormValues);
   }
