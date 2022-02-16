@@ -1,47 +1,32 @@
-<div class="main_container p-a-1">
-  <ng-container *ngIf="showMainPage; else adminDashboard">
+<ng-container>
 
-    <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <app-field-names-choice
-        [fieldNames]="adminMiddleware.fieldNames"
-        (requestFields)="createSelect($event)"
-      ></app-field-names-choice>
-    </div>
-
-
-    <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <h4 class="centerHorizontal">Обрані селекти</h4>
-
-      <ng-container class="m-t-2">
-        <app-request-spring
-          (filterRequest)="getQueryValues($event)"
-          [filterRequestInitValue]="filterRequestInitValue"
-        ></app-request-spring>
-      </ng-container>
-
-    </div>
+  <div class="dark heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
+    <app-field-names-choice
+      [fieldNames]="adminMiddleware.fieldNames"
+      (requestFields)="createSelect($event)"
+    ></app-field-names-choice>
+  </div>
 
 
-    <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
-      <ng-template appReqStringHost></ng-template>
-      <p>
-        {{queryValues | json}}
-      </p>
-    </div>
+  <div class="medium heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
+    <h4 class="centerHorizontal">Обрані селекти</h4>
 
-  </ng-container>
+    <ng-container class="m-t-2">
+      <app-request-spring
+        (filterRequest)="getQueryValues($event)"
+        [filterRequestInitValue]="filterRequestInitValue"
+      ></app-request-spring>
+    </ng-container>
 
-  <ng-template #adminDashboard>
-    <app-filter-fields-dashboard></app-filter-fields-dashboard>
-  </ng-template>
-
-
-  <button mat-button color="primary" (click)="showMainPage = !showMainPage">
-    <span *ngIf="showMainPage; else admin">admin</span>
-    <ng-template #admin><span>main</span></ng-template>
-  </button>
+  </div>
 
 
-</div>
+  <div class="light heightEmbedded col-sm-4 m-a-0 p-a-o scroll">
+    <p>
+      {{queryValues | json}}
+    </p>
+  </div>
+
+</ng-container>
 
 

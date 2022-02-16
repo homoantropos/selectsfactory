@@ -1,1 +1,17 @@
-<app-show-room></app-show-room>
+<div class="main_container p-a-1">
+  <ng-container *ngIf="showRoom; else adminDashboard">
+    <app-show-room></app-show-room>
+  </ng-container>
+
+  <ng-template #adminDashboard>
+    <app-filter-fields-dashboard></app-filter-fields-dashboard>
+  </ng-template>
+
+
+  <button mat-button color="primary" (click)="showRoom = !showRoom">
+    <span *ngIf="showRoom; else admin">admin</span>
+    <ng-template #admin><span>main</span></ng-template>
+  </button>
+
+
+</div>

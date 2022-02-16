@@ -10,6 +10,8 @@ import {switchMap} from "rxjs/operators";
 })
 export class AppComponent implements OnInit {
   title = 'selectsfactory';
+  showRoom = true;
+
   constructor(
     private admin: AdminMiddleware,
     private dbService: FilterRequestService
@@ -20,11 +22,7 @@ export class AppComponent implements OnInit {
     this.dbService.getFilterFields().pipe(
       switchMap(
         response => {
-          if (typeof response !== 'string') {
             this.admin.setFields(response)
-          } else {
-            this.admin.emptyDbMessage = response;
-          }
           return this.dbService.getFieldsName()
         }
       ),
@@ -37,9 +35,7 @@ export class AppComponent implements OnInit {
     )
       .subscribe(
         filterRequestInitValue => {
-          if(typeof filterRequestInitValue !== 'string') {
             this.admin.setFilterRequestInitValue(filterRequestInitValue);
-          }
         }
       );
   }
