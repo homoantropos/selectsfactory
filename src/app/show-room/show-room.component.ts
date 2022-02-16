@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FilterRequestService} from "../shared/services/filterRequetsServise";
 import {AdminMiddleware} from "../shared/services/admin-middleware";
 import {FilterRequest, FilterRequestInitValue} from "../shared/config/types";
@@ -9,14 +9,13 @@ import {FilterRequest, FilterRequestInitValue} from "../shared/config/types";
   styleUrls: ['./show-room.component.css']
 })
 
-export class ShowRoomComponent implements OnInit, OnDestroy {
+export class ShowRoomComponent implements OnInit {
 
   @Input() shownSelectsNames: Array<string> = [];
   @Input() queryValues: FilterRequest = {};
   @Input() filterRequestInitValue: FilterRequestInitValue = {};
 
   showMainPage = true;
-  showSelects = false;
 
   constructor(
     private frService: FilterRequestService,
@@ -39,18 +38,4 @@ export class ShowRoomComponent implements OnInit, OnDestroy {
     this.queryValues = filterRequest;
   }
 
-  emptyQuery(): boolean {
-    return this.shownSelectsNames.length > 0;
-  }
-
-  closeSelects(): void {
-    this.showSelects = !this.showSelects;
-    this.queryValues = {};
-  }
-
-  ngOnDestroy() {
-    this.shownSelectsNames = [];
-    this.queryValues = {};
-    this.filterRequestInitValue = {};
-  }
 }
